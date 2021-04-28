@@ -2,7 +2,7 @@ version: 0.1
 workspace:
   type: "kubernetes"
   spec:
-    image: index.docker.io/salesforce/salesforcedx:latest-slim
+    image: index.docker.io/marktmilligan/salesforce:latest
     container-based-vm: false
     cpu: 4
     memory: 8 
