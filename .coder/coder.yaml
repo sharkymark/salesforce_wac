@@ -1,34 +1,44 @@
-version: 0.1
+version: 0.2
 workspace:
-  type: "kubernetes"
-  spec:
-    image: index.docker.io/marktmilligan/salesforce:latest
-    container-based-vm: false
-    cpu: 4
-    memory: 8 
-    disk: 10
-    labels:    
-      com.coder.custom.chargeback: "salesforce_team"
+  type: kubernetes
+  specs:
+    kubernetes:
+      image:
+        value: index.docker.io/marktmilligan/salesforce:latest
+      container-based-vm:
+        value: false
+      cpu:
+        value: 1
+      memory: 
+        value: 1 
+      disk:
+        value: 10
+      labels:    
+        value:
+          com.coder.custom.chargeback: "salesforce_team"
   configure:
     start:
+      value:
       - name: install 8 vscode extensions (vsix) from image for development using the Salesforce.com API
+        continue-on-error: true
         directory: /home/coder/
         shell: /bin/bash
         command: |
-          /opt/coder/code-server/bin/code-server --install-extension /vsix/salesforce.salesforce-vscode-slds-1.4.2.vsix /vsix
-          /opt/coder/code-server/bin/code-server --install-extension /vsix/salesforce.salesforcedx-vscode-apex-51.10.0.vsix 
-          /opt/coder/code-server/bin/code-server --install-extension /vsix/salesforce.salesforcedx-vscode-apex-debugger-51.10.0.vsix
-          /opt/coder/code-server/bin/code-server --install-extension /vsix/salesforce.salesforcedx-vscode-apex-replay-debugger-51.10.0.vsix
-          /opt/coder/code-server/bin/code-server --install-extension /vsix/salesforce.salesforcedx-vscode-core-51.10.0.vsix
-          /opt/coder/code-server/bin/code-server --install-extension /vsix/salesforce.salesforcedx-vscode-lightning-51.10.0.vsix
-          /opt/coder/code-server/bin/code-server --install-extension /vsix/salesforce.salesforcedx-vscode-lwc-51.10.0.vsix
-          /opt/coder/code-server/bin/code-server --install-extension /vsix/salesforce.salesforcedx-vscode-visualforce-51.10.0.vsix                
+          /var/tmp/coder/code-server/bin/code-server --install-extension /vsix/salesforce.salesforce-vscode-slds-1.4.2.vsix /vsix
+          /var/tmp/coder/code-server/bin/code-server --install-extension /vsix/salesforce.salesforcedx-vscode-apex-51.10.0.vsix 
+          /var/tmp/coder/code-server/bin/code-server --install-extension /vsix/salesforce.salesforcedx-vscode-apex-debugger-51.10.0.vsix
+          /var/tmp/coder/code-server/bin/code-server --install-extension /vsix/salesforce.salesforcedx-vscode-apex-replay-debugger-51.10.0.vsix
+          /var/tmp/coder/code-server/bin/code-server --install-extension /vsix/salesforce.salesforcedx-vscode-core-51.10.0.vsix
+          /var/tmp/coder/code-server/bin/code-server --install-extension /vsix/salesforce.salesforcedx-vscode-lightning-51.10.0.vsix
+          /var/tmp/coder/code-server/bin/code-server --install-extension /vsix/salesforce.salesforcedx-vscode-lwc-51.10.0.vsix
+          /var/tmp/coder/code-server/bin/code-server --install-extension /vsix/salesforce.salesforcedx-vscode-visualforce-51.10.0.vsix                
       - name: install vim editor
+        continue-on-error: true
         directory: /home/coder/
         shell: /bin/bash
         command: sudo apt install vim                          
   devURLs:
-    - name: testapp
+    - name: sfdcapp
       port: 3000
       scheme: http
       access: org
