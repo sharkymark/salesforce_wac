@@ -37,7 +37,8 @@ workspace:
         directory: /home/coder/
         shell: /bin/bash
         command: sudo apt install vim                          
-  devURLs:
+  dev-urls:
+    value:
     - name: sfdcapp
       port: 3000
       scheme: http
